@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tayfun'un Tweetleri</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .tweet {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+
+  .tweet-info {
+    color: #888;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  #message {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100px; /* Yeni eklenen stil: textarea alanının yüksekliği */
+    resize: vertical; /* Dikey boyutlandırmaya izin ver */
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Tayfun'un Tweetleri</h1>
+    <form id="postForm">
+      <textarea id="message" placeholder="Ne düşünüyorsunuz?" required></textarea><br>
+      <button type="button" onclick="tweet()">Tweetle</button>
+    </form>
+    <div id="tweets"></div>
+  </div>
+
+  <script>
+    function tweet() {
+      var message = document.getElementById('message').value;
+      if (message.trim() === '') {
+        alert('Lütfen bir mesaj girin.');
+        return;
+      }
+
+      var tweetsContainer = document.getElementById('tweets');
+      var tweetDiv = document.createElement('div');
+      tweetDiv.classList.add('tweet');
+
+      // Tarih ve saat bilgisini al
+      var now = new Date();
+      var dateTimeString = now.toLocaleString('tr-TR');
+
+      // Tweet divini oluştur
+      tweetDiv.innerHTML = '<p>' + message + '</p><div class="tweet-info">Paylaşım tarihi: ' + dateTimeString + '</div>';
+
+      // Tweet divini sayfaya ekle
+      tweetsContainer.insertBefore(tweetDiv, tweetsContainer.firstChild);
+
+      // Formu sıfırla
+      document.getElementById('message').value = '';
+    }
+  </script>
+</body>
+</html>
